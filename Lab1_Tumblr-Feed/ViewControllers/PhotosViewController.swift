@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
 
     @IBOutlet weak var phototableview: UITableView!
-    
     var posts: [[String: Any]] = []
 
     override func viewDidLoad() {
@@ -39,6 +39,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 // TODO: Reload the table view
             }
+            
+            self.phototableview.reloadData()
         }
         task.resume()
     }
@@ -49,22 +51,35 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "This is row \(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "photcCell", for: indexPath) as! TableViewCell
+        let post = posts[indexPath.row]
+        
+        if let photos = post["photos"] as? [[String: Any]] {
+            // photos is NOT nil, we can use it!
+            // TODO: Get the photo url
+            let photo = photos[0]
+            let originalSize = photo["original_size"] as! [String: Any]
+            let urlString = originalSize["url"] as! String
+            let url = URL(string: urlString)
+            cell.reusableImage.af_setImage(withURL: url!)
+        }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "photocell") as! TableViewCell
-        
-        // Configure YourCustomCell using the outlets that you've defined.
-        
-        return cell
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the index path from the cell that was tapped
+        let indexPath = phototableview.indexPathForSelectedRow
+        // Get the Row of the Index Path and set as index
+        let index = indexPath?.row
+        // Get in touch with the DetailViewController
+        let detailViewController = segue.destination as! DetailViewController
+        // Pass on the data to the Detail ViewController by setting it's indexPathRow value
+        detailViewController.index = index
     }
 
 }

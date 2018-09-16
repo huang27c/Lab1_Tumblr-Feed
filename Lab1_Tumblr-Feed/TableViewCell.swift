@@ -10,7 +10,8 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
-    @IBOutlet weak var label: UILabel!
+    
+    @IBOutlet weak var reusableImage: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,5 +23,4 @@ class TableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }
