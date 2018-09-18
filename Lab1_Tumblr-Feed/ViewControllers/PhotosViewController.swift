@@ -39,7 +39,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 // TODO: Reload the table view
             }
-            
             self.phototableview.reloadData()
         }
         task.resume()
