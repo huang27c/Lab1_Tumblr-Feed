@@ -6,6 +6,7 @@ target 'Lab1_Tumblr-Feed' do
   use_frameworks!
 
   # Pods for Lab1_Tumblr-Feed
+  pod 'Alamofire', '~> 4.4'  
   pod 'AlamofireImage'
 
 

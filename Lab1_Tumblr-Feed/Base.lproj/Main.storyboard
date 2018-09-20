@@ -23,21 +23,21 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="photocell" rowHeight="51" id="NM2-bx-hNu" customClass="TableViewCell" customModule="Lab1_Tumblr_Feed" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="51"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="photocell" rowHeight="130" id="NM2-bx-hNu" customClass="TableViewCell" customModule="Lab1_Tumblr_Feed" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NM2-bx-hNu" id="PQC-hz-f3h">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="50.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="129.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xlg-jn-B1a">
-                                                    <rect key="frame" x="51" y="-39" width="240" height="128"/>
+                                                    <rect key="frame" x="51" y="0.0" width="240" height="128"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="reusableImage" destination="PQC-hz-f3h" id="gZ1-ud-0sm"/>
+                                            <outlet property="photoImageView" destination="xlg-jn-B1a" id="UM7-yJ-zV7"/>
                                             <segue destination="uEA-q9-FwR" kind="push" id="5Kc-6T-aiD"/>
                                         </connections>
                                     </tableViewCell>
