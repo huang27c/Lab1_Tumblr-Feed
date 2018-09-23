@@ -61,17 +61,23 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return posts.count
+    }
+   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "photocell", for: indexPath) as! TableViewCell
-        let post = posts[indexPath.row]
+        let post = posts[indexPath.section]
         
         if let photos = post["photos"] as? [[String: Any]] {
-            // photos is NOT nil, we can use it!
-            // TODO: Get the photo url
             let photo = photos[0]
             let originalSize = photo["original_size"] as! [String: Any]
             let urlString = originalSize["url"] as! String
@@ -82,14 +88,46 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        headerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        
+        let profileView = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
+        profileView.clipsToBounds = true
+        profileView.layer.cornerRadius = 15;
+        profileView.layer.borderColor = UIColor(white: 0.7, alpha: 0.8).cgColor
+        profileView.layer.borderWidth = 1;
+        
+        // Set the avatar
+        profileView.af_setImage(withURL: URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar")!)
+        headerView.addSubview(profileView)
+        
+        // Add a UILabel for the date here
+        let label = UILabel(frame: CGRect(x: 50, y: 10, width: 400, height: 20))
+        let onePost = self.posts[section]
+        let date = onePost["date"]
+        if let date2 = date {
+            label.text = "\(date2)"
+        }
+        // Use the section number to get the right URL
+        // let label = ...
+        headerView.addSubview(label)
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the index path from the cell that was tapped
-        let indexPath = phototableview.indexPathForSelectedRow
+        //let indexPath = phototableview.indexPathForSelectedRow
         // Get the Row of the Index Path and set as index
-        let index = indexPath?.row
+        //let index = indexPath?.row
         // Get in touch with the DetailViewController
-        let detailViewController = segue.destination as! DetailViewController
-        // Pass on the data to the Detail ViewController by setting it's indexPathRow value
-        detailViewController.index = index
+        let vc = segue.destination as! DetailViewController
+        let cell = sender as! TableViewCell
+        vc.image = cell.photoImageView.image
+        //let indexPath = phototableview.indexPath(for: cell)!
     }
 }

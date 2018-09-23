@@ -10,15 +10,16 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var photoImage: UIImageView!
+    var image: UIImage!
+    
     var photoURL : String = ""
     var caption : String = ""
-    
-    @IBOutlet weak var label: UILabel!
-    
     var index: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoImage.image = image
         // Do any additional setup after loading the view.
         //let url = URL(string: photoURL)
         //let captionCut = caption.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
