@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     var caption : String = ""
     
     @IBOutlet weak var label: UILabel!
+    
     var index: Int!
     
     override func viewDidLoad() {
