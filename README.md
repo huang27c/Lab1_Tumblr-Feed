@@ -53,7 +53,7 @@ Describe any challenges encountered while building the app.
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-# Lab 2 - *Name of App Here*
+# Lab 2 - *Tumblr-Feed Part 2*
 
 **Name of your app** is a photo browsing app app using the [The Tumblr API](https://www.tumblr.com/docs/en/api/v2#posts).
 
@@ -84,7 +84,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://media.giphy.com/media/YTN8SvcgsTynCTaHT9/giphy.gif' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
