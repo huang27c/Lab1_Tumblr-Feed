@@ -35,6 +35,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func fetchPhotos(){
+        //Network request
         let url = URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")!
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         session.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
@@ -46,7 +47,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                 let responseDictionary = dataDictionary["response"] as! [String: Any]
                 // Store the returned array of dictionaries in our posts property
                 self.posts = responseDictionary["posts"] as! [[String: Any]]
-                
                 self.phototableview.delegate = self
                 self.phototableview.dataSource = self
                 self.phototableview.reloadData()
@@ -78,10 +78,10 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         let post = posts[indexPath.section]
         
         if let photos = post["photos"] as? [[String: Any]] {
-            let photo = photos[0]
-            let originalSize = photo["original_size"] as! [String: Any]
-            let urlString = originalSize["url"] as! String
-            let url = URL(string: urlString)
+            let photo = photos[0] //Get the first photo in the photos array
+            let originalSize = photo["original_size"] as! [String: Any] //Get the original size dictionary from the photo
+            let urlString = originalSize["url"] as! String //Get the url string from the original size dictionary
+            let url = URL(string: urlString) //Create a URL using the urlString
             cell.photoImageView.af_setImage(withURL: url!)
         }
         
