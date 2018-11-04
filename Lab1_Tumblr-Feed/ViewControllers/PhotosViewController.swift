@@ -10,12 +10,12 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var phototableview: UITableView!
     var posts: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
+    var isMoreDataLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,40 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     
     @objc func didPullToRefresh(_ refreshControl: UIRefreshControl) {
         fetchPhotos()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Handle scroll behavior here
+        if (!isMoreDataLoading) {
+            isMoreDataLoading = true
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = phototableview.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - phototableview.bounds.size.height
+            // ... Code to load more results ...
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && phototableview.isDragging) {
+                isMoreDataLoading = true
+                loadMoreData()
+            }
+        }
+    }
+    
+    func loadMoreData() {
+        let url = URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")!
+        let session = URLSession(configuration: URLSessionConfiguration.default,
+                                 delegate:nil,
+                                 delegateQueue:OperationQueue.main)
+        let task : URLSessionDataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+            
+            // Update flag
+            self.isMoreDataLoading = false
+            
+            // ... Use the new data to update the data source ...
+            
+            // Reload the tableView now that there is new data
+            self.phototableview.reloadData()
+        })
+        task.resume()
     }
     
     func fetchPhotos(){
