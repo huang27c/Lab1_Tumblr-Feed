@@ -41,6 +41,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         session.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         let task = session.dataTask(with: url) { (data, response, error) in
             if let error = error {
+                self.provideAlert(title: "Network Error", message: "Please check your network")
                 print(error.localizedDescription)
             } else if let data = data,
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
@@ -129,5 +130,16 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = sender as! TableViewCell
         vc.image = cell.photoImageView.image
         //let indexPath = phototableview.indexPath(for: cell)!
+    }
+    
+    func provideAlert(title:String, message:String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // handle response here.
+        }
+        alertController.addAction(OKAction)
+        //self.activityIndicator.stopAnimating()
+        present(alertController, animated: true)
     }
 }
