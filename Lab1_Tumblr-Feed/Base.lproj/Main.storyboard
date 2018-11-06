@@ -30,8 +30,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="204.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xlg-jn-B1a">
-                                                    <rect key="frame" x="0.0" y="-10" width="375" height="226"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" image="375x230" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xlg-jn-B1a">
+                                                    <rect key="frame" x="0.0" y="-10" width="375" height="230"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -130,7 +130,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rC9-Ks-QTC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="2952.8000000000002" y="31.773399014778327"/>
+=======
+            <point key="canvasLocation" x="2124" y="32"/>
+>>>>>>> eb6d32e8ed4ea1b5ca6895f2d202b1f06659f528
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3UA-Oy-tjD">
@@ -151,4 +155,7 @@
             <point key="canvasLocation" x="116" y="34"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="375x230" width="375" height="230"/>
+    </resources>
 </document>

@@ -11,7 +11,10 @@ import Alamofire
 import AlamofireImage
 
 class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+<<<<<<< HEAD
     
+=======
+>>>>>>> eb6d32e8ed4ea1b5ca6895f2d202b1f06659f528
 
     @IBOutlet weak var phototableview: UITableView!
     var posts: [[String: Any]] = []
@@ -36,6 +39,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+<<<<<<< HEAD
         if (!isMoreDataLoading) {
             // Calculate the position of one screen length before the bottom of the results
             let scrollViewContentHeight = phototableview.contentSize.height
@@ -48,10 +52,44 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 // Code to load more results
                 fetchPhotos()
+=======
+        // Handle scroll behavior here
+        if (!isMoreDataLoading) {
+            isMoreDataLoading = true
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = phototableview.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - phototableview.bounds.size.height
+            // ... Code to load more results ...
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && phototableview.isDragging) {
+                isMoreDataLoading = true
+                loadMoreData()
+>>>>>>> eb6d32e8ed4ea1b5ca6895f2d202b1f06659f528
             }
         }
     }
     
+<<<<<<< HEAD
+=======
+    func loadMoreData() {
+        let url = URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")!
+        let session = URLSession(configuration: URLSessionConfiguration.default,
+                                 delegate:nil,
+                                 delegateQueue:OperationQueue.main)
+        let task : URLSessionDataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+            
+            // Update flag
+            self.isMoreDataLoading = false
+            
+            // ... Use the new data to update the data source ...
+            
+            // Reload the tableView now that there is new data
+            self.phototableview.reloadData()
+        })
+        task.resume()
+    }
+    
+>>>>>>> eb6d32e8ed4ea1b5ca6895f2d202b1f06659f528
     func fetchPhotos(){
         //Network request
         let url = URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")!
@@ -60,8 +98,13 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         let task = session.dataTask(with: url) { (data, response, error) in
             self.isMoreDataLoading = false
             if let error = error {
+<<<<<<< HEAD
                 self.provideAlert(title: "Network Erros", message: "Please check your network")
                 print(error)
+=======
+                self.provideAlert(title: "Network Error", message: "Please check your network")
+                print(error.localizedDescription)
+>>>>>>> eb6d32e8ed4ea1b5ca6895f2d202b1f06659f528
             } else if let data = data,
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 let responseDictionary = dataDictionary["response"] as! [String: Any]
@@ -153,6 +196,17 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
             // handle response here.
         }
         alertController.addAction(OKAction)
+        present(alertController, animated: true)
+    }
+    
+    func provideAlert(title:String, message:String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // handle response here.
+        }
+        alertController.addAction(OKAction)
+        //self.activityIndicator.stopAnimating()
         present(alertController, animated: true)
     }
 }
