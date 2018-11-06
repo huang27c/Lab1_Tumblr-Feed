@@ -20,15 +20,21 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoImage.image = image
-        // Do any additional setup after loading the view.
-        //let url = URL(string: photoURL)
-        //let captionCut = caption.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-        //detailedImage.af_setImage(withURL: url!)
-        //captionLabel.text = captionCut
     }
 
+    @IBAction func onZoom(_ sender: Any) {
+        performSegue(withIdentifier: "zoomSegue", sender: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the index path from the cell that was tapped
+        if segue.identifier == "zoomSegue" {
+            let vc = segue.destination as! FullScreenPhotoViewController
+            vc.image = photoImage.image
+        }
     }
 }

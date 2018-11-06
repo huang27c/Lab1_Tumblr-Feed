@@ -13,6 +13,7 @@
 		E145B8FA214B3D4D000DD6B3 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E145B8F9214B3D4D000DD6B3 /* TableViewCell.swift */; };
 		E145B8FC214B4290000DD6B3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E145B8FB214B4290000DD6B3 /* DetailViewController.swift */; };
 		E173B3FE214AD7A400D02F80 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E173B3FD214AD7A400D02F80 /* PhotosViewController.swift */; };
+		E17FCD01218E7FFC007879EB /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FCD00218E7FFC007879EB /* FullScreenPhotoViewController.swift */; };
 		E18992E4214AD2840056C681 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18992E3214AD2840056C681 /* AppDelegate.swift */; };
 		E18992E9214AD2840056C681 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E18992E7214AD2840056C681 /* Main.storyboard */; };
 		E18992EB214AD2850056C681 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E18992EA214AD2850056C681 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 		E145B8F9214B3D4D000DD6B3 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		E145B8FB214B4290000DD6B3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		E173B3FD214AD7A400D02F80 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		E17FCD00218E7FFC007879EB /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
 		E18992E0214AD2840056C681 /* Lab1_Tumblr-Feed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lab1_Tumblr-Feed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E18992E3214AD2840056C681 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E18992E8214AD2840056C681 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				E173B3FD214AD7A400D02F80 /* PhotosViewController.swift */,
 				E145B8FB214B4290000DD6B3 /* DetailViewController.swift */,
+				E17FCD00218E7FFC007879EB /* FullScreenPhotoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -351,16 +354,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Lab1_Tumblr-Feed/Pods-Lab1_Tumblr-Feed-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
@@ -399,6 +398,7 @@
 				E18992E4214AD2840056C681 /* AppDelegate.swift in Sources */,
 				E173B3FE214AD7A400D02F80 /* PhotosViewController.swift in Sources */,
 				E145B8FC214B4290000DD6B3 /* DetailViewController.swift in Sources */,
+				E17FCD01218E7FFC007879EB /* FullScreenPhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

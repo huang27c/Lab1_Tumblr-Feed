@@ -10,12 +10,13 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
 
     @IBOutlet weak var phototableview: UITableView!
     var posts: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
+    var isMoreDataLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +35,33 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         fetchPhotos()
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = phototableview.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - phototableview.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && phototableview.isDragging) {
+                
+                isMoreDataLoading = true
+                
+                // Code to load more results
+                fetchPhotos()
+            }
+        }
+    }
+    
     func fetchPhotos(){
         //Network request
         let url = URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")!
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         session.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         let task = session.dataTask(with: url) { (data, response, error) in
+            self.isMoreDataLoading = false
             if let error = error {
-                print(error.localizedDescription)
+                self.provideAlert(title: "Network Erros", message: "Please check your network")
+                print(error)
             } else if let data = data,
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 let responseDictionary = dataDictionary["response"] as! [String: Any]
@@ -121,13 +141,18 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the index path from the cell that was tapped
-        //let indexPath = phototableview.indexPathForSelectedRow
-        // Get the Row of the Index Path and set as index
-        //let index = indexPath?.row
-        // Get in touch with the DetailViewController
         let vc = segue.destination as! DetailViewController
         let cell = sender as! TableViewCell
         vc.image = cell.photoImageView.image
-        //let indexPath = phototableview.indexPath(for: cell)!
+    }
+    
+    func provideAlert(title:String, message:String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // handle response here.
+        }
+        alertController.addAction(OKAction)
+        present(alertController, animated: true)
     }
 }

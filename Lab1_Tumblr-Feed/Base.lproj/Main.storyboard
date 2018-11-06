@@ -38,7 +38,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="photoImageView" destination="xlg-jn-B1a" id="UM7-yJ-zV7"/>
-                                            <segue destination="uEA-q9-FwR" kind="push" id="5Kc-6T-aiD"/>
+                                            <segue destination="uEA-q9-FwR" kind="show" id="Gnh-Op-ppm"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -64,9 +64,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="erm-0q-pTs">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="erm-0q-pTs">
                                 <rect key="frame" x="0.0" y="88" width="375" height="286"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="seU-OE-39s" appends="YES" id="RrJ-Uu-Uyt"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -75,11 +79,58 @@
                     <navigationItem key="navigationItem" id="L0d-Bl-O9b"/>
                     <connections>
                         <outlet property="photoImage" destination="erm-0q-pTs" id="uif-h5-LgE"/>
+                        <segue destination="kF4-yI-3eH" kind="presentation" identifier="zoomSegue" id="dYm-KK-Vy2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVG-8G-poc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="seU-OE-39s">
+                    <connections>
+                        <action selector="onZoom:" destination="uEA-q9-FwR" id="Fjg-FD-R1n"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1680.8" y="31.773399014778327"/>
+            <point key="canvasLocation" x="1948" y="31.773399014778327"/>
+        </scene>
+        <!--Full Screen Photo View Controller-->
+        <scene sceneID="ust-ok-lfl">
+            <objects>
+                <viewController id="kF4-yI-3eH" customClass="FullScreenPhotoViewController" customModule="Lab1_Tumblr_Feed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s7x-EF-TEB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4zm-Rk-Fjr">
+                                <rect key="frame" x="15" y="44" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="onCancel:" destination="kF4-yI-3eH" eventType="touchUpInside" id="3Pv-RA-0cN"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="U2G-9K-yMh">
+                                <rect key="frame" x="15" y="82" width="343" height="315"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kF4-yI-3eH" id="GBQ-zK-gVR"/>
+                                </connections>
+                            </scrollView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6se-q2-0O7">
+                                <rect key="frame" x="15" y="82" width="343" height="315"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="46o-3Y-DGx"/>
+                    </view>
+                    <connections>
+                        <outlet property="photoImage" destination="6se-q2-0O7" id="jbx-gc-Rkd"/>
+                        <outlet property="scrollView" destination="U2G-9K-yMh" id="yIg-vE-lWS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rC9-Ks-QTC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2952.8000000000002" y="31.773399014778327"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3UA-Oy-tjD">
@@ -97,7 +148,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rS0-y4-gKR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77.599999999999994" y="31.934032983508249"/>
+            <point key="canvasLocation" x="116" y="34"/>
         </scene>
     </scenes>
 </document>
